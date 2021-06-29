@@ -4,6 +4,7 @@ const Home=()=>import(/* webpackChunkName: "home" */ '../views/home/Home.vue')
 const Cart=()=>import(/* webpackChunkName: "cart" */ '../views/cart/Cart.vue')
 const Category=()=>import(/* webpackChunkName: "category" */ '../views/category/Category.vue')
 const Mine=()=>import(/* webpackChunkName: "mine" */ '../views/mine/Mine.vue')
+const Detail=()=>import(/* webpackChunkName: "mine" */ '../views/detail/Detail.vue')
 const routes: Array<RouteRecordRaw> = [
   {
     path:'',
@@ -28,6 +29,11 @@ const routes: Array<RouteRecordRaw> = [
     path:'/mine',
     name:"Mine",
     component:Mine
+  },
+  {
+    path:'/detail/:id',
+    name:"Detail",
+    component:Detail
   }
 ]
 

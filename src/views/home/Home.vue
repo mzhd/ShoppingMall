@@ -14,7 +14,8 @@
 
     </TabController>
 
-    <Scroll class="content" :probe-type="3"
+    <Scroll class="content"
+            :probe-type="3"
             :pull-down-refresh="true"
             :pull-up-load="true"
             :observe-image="true"
@@ -22,7 +23,7 @@
             @pullingUp="pullingUp"
             @onScroll="onContentScroll"
             ref="scroll" >
-      <swiper :banner="banner"></swiper>
+      <HomeSwiper :banner="banner"></HomeSwiper>
       <HomeRecommend :recommend="recommend"/>
       <HomeFeature></HomeFeature>
       <TabController
@@ -106,7 +107,7 @@
 <script>
 import NavBar from "@/components/common/navbar/NavBar";
 import {getHomeData, getMultiData} from "@/network/home";
-import Swiper from "@/views/home/components/HomeSwiper";
+import HomeSwiper from "@/views/home/components/HomeSwiper";
 import HomeRecommend from "@/views/home/components/HomeRecommend";
 import HomeFeature from "@/views/home/components/HomeFeature";
 import TabController from "@/components/common/tabcontroller/TabController";
@@ -128,7 +129,7 @@ export default {
       isShowBackTop:false,
       isShowTabController:false,
       tabOffsetTop:0,
-      saveY:0,
+      offsetY:0,
     }
   },
   computed:{
@@ -138,7 +139,7 @@ export default {
   },
   components: {
     NavBar,
-    Swiper,
+    HomeSwiper,
     HomeRecommend,
     HomeFeature,
     TabController,
@@ -153,12 +154,12 @@ export default {
 
   },
   activated() {
-    this.$refs.scroll.scrollTo(0,this.saveY,0)
+    this.$refs.scroll.scrollTo(0,this.offsetY,0)
     this.$refs.scroll.bs.refresh()
   },
   deactivated() {
-    this.saveY=this.$refs.scroll.getScrollY()
-    console.log(this.saveY);
+    this.offsetY=this.$refs.scroll.getScrollY()
+    // console.log(this.saveY);
   },
   methods: {
     /**
@@ -243,11 +244,7 @@ export default {
 
 .content{
   overflow: hidden;
-  position: absolute;
-  top: 44px;
-  bottom: 49px;
-  left: 0;
-  right: 0;
+  height: calc(100% - 44px - 49px);
 }
 .home-tab-controller{
   position: absolute;

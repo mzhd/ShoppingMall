@@ -15,5 +15,6 @@ export default {
   position: fixed;
   right: 8px;
   bottom: 55px;
+  z-index: 100;
 }
 </style>

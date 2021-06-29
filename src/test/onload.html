@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>图片加载监听</title>
+</head>
+<body>
+<script>
+  function onImgLoad(){
+    console.log("onImgLoad");
+  }
+  function onImgClick(){
+    console.log("onImgClick");
+  }
+</script>
+<img src="https://s5.mogucdn.com/mlcdn/c45406/210616_399di34db1j68a74bek01j6899k8i_640x1070.jpg_500x9999.v1c7E.81.webp" onload="onImgLoad()" onclick="onImgClick()" alt="">
+<button onclick="onImgClick()">点我</button>
+</body>
+
+</html>

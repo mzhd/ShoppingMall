@@ -12,6 +12,7 @@ import BScroll from "@better-scroll/core";
 import PullUp from "@better-scroll/pull-up";
 import PullDown from "@better-scroll/pull-down";
 import ObserveImage from '@better-scroll/observe-image'
+import {debounce} from "@/common/utils";
 
 export default {
   name: "Scroll",
@@ -58,9 +59,12 @@ export default {
       observeImage: this.observeImage,
       click: true
     })
-    this.onScroll()
-    this.onPullingDown()
-    this.onPullingUp()
+    if(this.probeType===3)
+      this.onScroll()
+    if(this.pullDownRefresh)
+      this.onPullingDown()
+    if(this.pullUpLoad)
+      this.onPullingUp()
   }, methods: {
     scrollTo(x, y, time = 300) {
       this.bs.scrollTo(x, y, time)
@@ -77,7 +81,7 @@ export default {
     },
     onPullingDown() {
       this.bs.on('pullingDown', () => {
-        const refresh=this.debounce(()=>{
+        const refresh=debounce(()=>{
           console.log("下拉刷新");
           this.$emit('pullingDown')
           this.bs.finishPullDown()
@@ -87,7 +91,7 @@ export default {
     },
     onPullingUp() {
       this.bs.on('pullingUp', () => {
-        const loadMore=this.debounce(()=>{
+        const loadMore=debounce(()=>{
           console.log("上拉加载");
           this.$emit('pullingUp')
           this.bs.finishPullUp()
@@ -95,16 +99,7 @@ export default {
         loadMore()
       })
     },
-    //防抖
-    debounce(func,delay){
-      let timer=null
-      return function (...args){
-        if(timer!=null) clearTimeout(timer)
-        timer=setTimeout(()=>{
-          func.apply(this,args)
-        },delay)
-      }
-    }
+
   }
 }
 </script>

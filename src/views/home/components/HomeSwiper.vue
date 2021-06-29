@@ -30,6 +30,7 @@ import 'swiper/swiper.min.css';
 SwiperCore.use([Navigation, Pagination, Autoplay])
 
 export default {
+  name:"HomeSwiper",
   components: {
     Swiper,
     SwiperSlide,
@@ -45,7 +46,7 @@ export default {
   setup(props, context) {
     const swiperOptions = reactive({
       autoPlay: {
-        delay: 300000,
+        delay: 3000,
         //当用户点击（或触摸）后是否停止播放
         disableOnInteraction: false
       },

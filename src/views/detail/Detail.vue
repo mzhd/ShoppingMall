@@ -14,7 +14,7 @@
       <DetailImageInfo ref="imageInfo" @onImgLoad="onImgLoad" :imgs="imgs"></DetailImageInfo>
     </Scroll>
     <BackTop @click="backTopClick" v-show="isShowBackTop"></BackTop>
-    <DetailBottomBar @addCart="addCart"></DetailBottomBar>
+    <DetailBottomBar @addCart="addToCart"></DetailBottomBar>
   </div>
 </template>
 
@@ -30,6 +30,7 @@ import DetailTest from "@/views/detail/components/DetailBaseInfo";
 import {debounce} from "@/common/utils";
 import BackTop from "@/components/common/backtop/BackTop";
 import DetailBottomBar from "@/views/detail/components/DetailBottomBar";
+import {mapActions} from "vuex";
 
 export default {
   name: "Detail",
@@ -67,10 +68,11 @@ export default {
     },100)
   },
   mounted() {
-
+    this.$refs.scroll.bs.refresh()
   },
   methods: {
-    addCart(){
+    ...mapActions(['addCart']),
+    addToCart(){
       // console.log("添加购物车");
 
       const product={}
@@ -81,8 +83,12 @@ export default {
       product.id=this.id
       product.count=0
       product.desc="商品描述"
-
-      this.$store.commit("addCart",product)
+      //1、普通的actions调用
+      // this.$store.dispatch("addCart",product)
+      //2、通过mapActions调用
+      this.addCart(product).then((res)=>{
+        console.log(res);
+      })
     },
     backTopClick(){
       this.$refs.scroll.scrollTo(0,0)

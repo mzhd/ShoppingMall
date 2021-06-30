@@ -1,6 +1,6 @@
 <template>
   <TabBar>
-    <TabBarItem ActiveColor="red" path="/home">
+    <TabBarItem class="tab-bar-item" ActiveColor="red" path="/home">
       <template #item_icon >
         <img src="@/assets/img/tabbar/home.svg" alt="">
       </template>
@@ -61,5 +61,10 @@ export default {
 </script>
 
 <style scoped>
-
+.tab-bar-item img {
+  width: 24px;
+  height: 24px;
+  margin-top: 3px;
+  vertical-align: middle;
+}
 </style>
